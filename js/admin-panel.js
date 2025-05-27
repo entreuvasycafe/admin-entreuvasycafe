@@ -24,32 +24,34 @@ const auth = getAuth(app);
 const storage = getStorage(app);
 
 
+
 // -------------------- Selección de Categoría --------------------
-// -------------------- Selección de Categoría --------------------
+
 // Obtener los botones de categoría y el campo oculto para la categoría seleccionada
 const categoriaInput = document.getElementById('categoria');
 const categoriaButtons = document.querySelectorAll('.categoria-btn');
 
 // Función para manejar la selección de categorías
 categoriaButtons.forEach(button => {
-button.addEventListener('click', () => {
-const categoriaSeleccionada = button.getAttribute('data-categoria');
+  button.addEventListener('click', () => {
+    const categoriaSeleccionada = button.getAttribute('data-categoria');
 
-// Establecer la categoría seleccionada en el campo oculto
-categoriaInput.value = categoriaSeleccionada;
+    // Establecer la categoría seleccionada en el campo oculto
+    categoriaInput.value = categoriaSeleccionada;
 
-// Activar el botón seleccionado
-categoriaButtons.forEach(btn => btn.classList.remove('active'));
-button.classList.add('active');
+    // Activar el botón seleccionado
+    categoriaButtons.forEach(btn => btn.classList.remove('categoria-activa'));
+    button.classList.add('categoria-activa');
 
-// Filtrar y mostrar productos según la categoría seleccionada
-mostrarProductosPorCategoria(categoriaSeleccionada);
+    // Filtrar y mostrar productos según la categoría seleccionada
+    mostrarProductosPorCategoria(categoriaSeleccionada);
+  });
 });
-});
+
+// -------------------- Función para mostrar productos --------------------
 
 // Función para mostrar productos por categoría desde Firestore
-// Función para mostrar productos por categoría desde Firestore
-async function mostrarProductosPorCategoria(categoria) {
+async function mostrarProductosPorCategoria(categoria = null) {
   try {
     // Obtener los productos de Firestore
     const productosSnapshot = await getDocs(collection(db, "productos"));
@@ -58,14 +60,17 @@ async function mostrarProductosPorCategoria(categoria) {
       id: doc.id
     }));
 
-    // Filtrar los productos que coinciden con la categoría seleccionada
-    const productosFiltrados = productos.filter(producto => producto.categoria === categoria);
+    // Filtrar si hay una categoría seleccionada
+    let productosFiltrados = productos;
+    if (categoria) {
+      productosFiltrados = productos.filter(producto => producto.categoria === categoria);
+    }
 
     // Limpiar productos actuales en la interfaz
     const productosContenedor = document.getElementById('productos-contenedor');
-    productosContenedor.innerHTML = ''; // Limpiar contenedor antes de agregar los nuevos productos
+    productosContenedor.innerHTML = '';
 
-    // Mostrar los productos filtrados en la interfaz
+    // Mostrar los productos
     if (productosFiltrados.length > 0) {
       productosFiltrados.forEach((producto) => {
         const col = document.createElement("div");
@@ -164,7 +169,8 @@ async function mostrarProductosPorCategoria(categoria) {
                 timer: 1500
               });
 
-              mostrarProductosPorCategoria(categoria); // recargar la lista con la misma categoría
+              // Recargar los productos después de eliminar
+              mostrarProductosPorCategoria(categoria);
             } catch (error) {
               Swal.fire({
                 icon: 'error',
@@ -188,12 +194,10 @@ async function mostrarProductosPorCategoria(categoria) {
   }
 }
 
-// Llamada inicial para mostrar productos por defecto o una categoría por defecto
-mostrarProductosPorCategoria('Postres'); // Cambia según la categoría predeterminada si es necesario
-
-
-// Llamada inicial para mostrar productos por defecto o una categoría por defecto
-//mostrarProductosPorCategoria('Postres'); // Cambia según la categoría predeterminada si es necesario
+// -------------------- Mostrar todos los productos al cargar la página --------------------
+document.addEventListener('DOMContentLoaded', () => {
+  mostrarProductosPorCategoria();
+});
 
 
 // -------------------- Elementos del DOM --------------------
@@ -205,63 +209,84 @@ const form = document.getElementById('form-producto');
 
 // -------------------- Agregar un nuevo producto con imagen --------------------
 form.addEventListener("submit", async (e) => {
-e.preventDefault();
-console.log("🟡 Formulario de producto enviado");
+  e.preventDefault();
+  console.log("🟡 Formulario de producto enviado");
 
-const titulo = document.getElementById('titulo').value;
-const imagenFile = document.getElementById('imagen').files[0];
-const descripcion = document.getElementById('descripcion').value;
-const precio = parseInt(document.getElementById('precio').value);
-const categoria = document.getElementById('categoria').value;  // Obtener la categoría seleccionada
+  const titulo = document.getElementById('titulo').value;
+  const imagenFile = document.getElementById('imagen').files[0];
+  const descripcion = document.getElementById('descripcion').value;
+  const precio = parseInt(document.getElementById('precio').value);
+  const categoria = document.getElementById('categoria').value;
 
-console.log("📋 Valores del formulario:");
-console.log("Título:", titulo);
-console.log("Descripción:", descripcion);
-console.log("Precio:", precio);
-console.log("Categoría:", categoria);  // Mostrar categoría en consola
-console.log("Archivo seleccionado:", imagenFile);
+  console.log("📋 Valores del formulario:");
+  console.log("Título:", titulo);
+  console.log("Descripción:", descripcion);
+  console.log("Precio:", precio);
+  console.log("Categoría:", categoria);
+  console.log("Archivo seleccionado:", imagenFile);
 
-if (!imagenFile) {
-alert("Debes seleccionar una imagen.");
-return;
-}
+  if (!imagenFile) {
+    Swal.fire({
+      icon: 'warning',
+      title: 'Imagen faltante',
+      text: 'Debes seleccionar una imagen para el producto.',
+    });
+    return;
+  }
 
-if (!categoria) {
-alert("Debes seleccionar una categoría.");
-return;
-}
+  if (!categoria) {
+    Swal.fire({
+      icon: 'warning',
+      title: 'Categoría faltante',
+      text: 'Debes seleccionar una categoría.',
+    });
+    return;
+  }
 
-try {
-const timestamp = Date.now();
-const storageRef = ref(storage, `imagenes/${timestamp}-${imagenFile.name}`);
-console.log("📤 Subiendo imagen a Firebase Storage:", storageRef.fullPath);
+  try {
+    const timestamp = Date.now();
+    const storageRef = ref(storage, `imagenes/${timestamp}-${imagenFile.name}`);
+    console.log("📤 Subiendo imagen a Firebase Storage:", storageRef.fullPath);
 
-await uploadBytes(storageRef, imagenFile);
-console.log("✅ Imagen subida correctamente");
+    await uploadBytes(storageRef, imagenFile);
+    console.log("✅ Imagen subida correctamente");
 
-const imageUrl = await getDownloadURL(storageRef);
-console.log("🌐 URL de la imagen:", imageUrl);
+    const imageUrl = await getDownloadURL(storageRef);
+    console.log("🌐 URL de la imagen:", imageUrl);
 
-const nuevoProducto = {
-  titulo,
-  imagen: imageUrl,
-  descripcion,
-  precio,
-  categoria // Añadir la categoría al producto
-};
+    const nuevoProducto = {
+      titulo,
+      imagen: imageUrl,
+      descripcion,
+      precio,
+      categoria
+    };
 
-console.log("📝 Enviando producto a Firestore:", nuevoProducto);
+    console.log("📝 Enviando producto a Firestore:", nuevoProducto);
 
-await addDoc(collection(db, "productos"), nuevoProducto);
-alert("✅ Producto agregado");
+    await addDoc(collection(db, "productos"), nuevoProducto);
 
-form.reset();
-document.getElementById("imagen-preview").style.display = "none";
-mostrarProductosPorCategoria(categoria);
-} catch (error) {
-console.error("❌ Error al guardar el producto:", error);
-alert("Error al guardar producto: " + error.message);
-}
+    // ✅ Mostrar alerta de éxito con SweetAlert2
+    Swal.fire({
+      icon: 'success',
+      title: 'Producto agregado',
+      text: '¡El producto fue agregado correctamente!',
+      showConfirmButton: false,
+      timer: 2000
+    });
+
+    // Resetear el formulario y actualizar la vista
+    form.reset();
+    document.getElementById("imagen-preview").style.display = "none";
+    mostrarProductosPorCategoria(categoria);
+  } catch (error) {
+    console.error("❌ Error al guardar el producto:", error);
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: 'Ocurrió un error al guardar el producto: ' + error.message,
+    });
+  }
 });
 
 

@@ -1,0 +1,139 @@
+ /* Colores personalizados */
+ :root {
+    --indigo: #4B0082;
+    --indigo-light: #6a0dad;
+    --indigo-hover: #37006c;
+    --gray-light: #f8f9fa;
+  }
+  
+  /* Texto e íconos índigo */
+  .text-indigo {
+    color: var(--indigo);
+  }
+  
+  /* Botón índigo personalizado */
+  .btn-indigo {
+    background-color: var(--indigo);
+    color: white;
+    border: none;
+  }
+  
+  .btn-indigo:hover {
+    background-color: var(--indigo-hover);
+    color: white;
+  }
+  
+  /* Botón outline índigo */
+  .btn-outline-indigo {
+    color: var(--indigo);
+    border-color: var(--indigo);
+  }
+  
+  .btn-outline-indigo:hover {
+    background-color: var(--indigo);
+    color: white;
+  }
+  
+  /* Contenedor del panel */
+  #panel-admin {
+    background-color: var(--gray-light);
+    min-height: 100vh;
+    padding-bottom: 50px;
+  }
+  
+  .containLogoEntreUvas{
+    background-color: #f5f0fa !important;
+  }
+  
+  /* Título principal */
+  h3.fw-bold {
+    font-size: 1.8rem;
+    color: var(--indigo);
+  }
+  
+  /* Botones de categorías */
+  .categoria-btn {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    text-transform: capitalize;
+  }
+  
+  
+  /* Estilos para los botones */
+  button {
+    transition: all 0.3s ease;
+  }
+  
+  /* Formulario */
+  form#form-producto .form-control, form#form-producto .form-select {
+    border-radius: 8px;
+    border-color: var(--indigo);
+  }
+  
+  /* Títulos dentro de tarjetas */
+  .card-body h4 {
+    font-size: 1.4rem;
+  }
+  
+  /* Imágenes */
+  #imagen-preview {
+    border: 2px solid var(--indigo);
+    padding: 5px;
+    margin-top: 10px;
+  }
+  
+  .card-img-top {
+    height: 200px; 
+    object-fit: cover; 
+    object-position: center;
+    
+  }
+  
+  /* Lista de productos */
+  #lista-productos, #productos-contenedor {
+    margin-top: 20px;
+  }
+  
+  /* Productos individuales (puedes personalizar más) */
+  #lista-productos .producto-card, #productos-contenedor .producto-card {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  #lista-productos .producto-card:hover, #productos-contenedor .producto-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  
+  /* Botón cerrar sesión */
+  #cerrar-sesion {
+    border-radius: 8px;
+    font-weight: 600;
+  }
+  
+  /* Sombra para tarjetas */
+  .shadow-sm {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+  }
+  
+  /* Espaciados generales */
+  .mb-4 {
+    margin-bottom: 1.5rem !important;
+  }
+  
+  .mb-5 {
+    margin-bottom: 2rem !important;
+  }
+  
+  .categoria-btn.categoria-activa {
+    background-color: var(--indigo);
+    color: white !important;
+    font-weight: bold;
+    border-color: var(--indigo);
+    box-shadow: 0 0 8px rgba(75, 0, 130, 0.5);
+  }
