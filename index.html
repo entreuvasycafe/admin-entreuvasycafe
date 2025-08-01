@@ -2,22 +2,18 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- -->
   <title>Panel Admin - Entre Uvas y Café</title>
   <link rel="icon" href="img/logo.png">
-
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
-
 </head>
 <body class="bg-light">
-
   <div class="container mt-5">
     <h1 class="text-center mb-4">Panel de Administración</h1>
-
     <!-- Login -->
     <div id="login-section" class="card mx-auto p-4 shadow-sm" style="max-width: 400px;">
-    
       <form id="login-form">
         <img src="img/logo.png" alt="" style="max-width: 100%; height: 220px; object-fit: contain; display: block; margin: 0 auto;">
         <h2 class="mb-3 text-center">Iniciar sesión</h2>
@@ -31,40 +27,30 @@
        <a href="https://entreuvasycafe.cl/" class="btn btn-outline-indigo w-100 mt-3">Volver a Entre Uvas y Café </a> 
       </form>
     </div>
-
-    
-
     <!-- Panel admin -->
     <div id="panel-admin" class="mt-5" style="display: none;">
       <div class="container py-4">
     
-        <!-- Encabezado con título y logo -->
-      <div class="containLogoEntreUvas d-flex align-items-center justify-content-between p-3 rounded shadow-sm bg-light mb-4">
+      <!-- Encabezado con título y logo -->
+        <div class="containLogoEntreUvas d-flex align-items-center justify-content-center p-3 rounded shadow-sm bg-light mb-4 flex-wrap">
           <img src="img/logo.png" alt="Logo" style="height: 220px; object-fit: contain;">
-          <h3 class="mb-0 fw-bold text-indigo">Seleccionar Categoría</h3>
-         
-           <!-- Botones de categorías -->
-         <div class="d-flex flex-wrap gap-2 mb-4">
-          <button type="button" class="btn btn-outline-indigo categoria-btn" data-categoria="">Todos</button>
-          <button type="button" class="btn btn-outline-indigo categoria-btn" data-categoria="Tortas">Tortas</button>
-          <button type="button" class="btn btn-outline-indigo categoria-btn" data-categoria="Postres">Postres</button>
-          <button type="button" class="btn btn-outline-indigo categoria-btn" data-categoria="Tartaletas">Tartaletas</button>
-          <button type="button" class="btn btn-outline-indigo categoria-btn" data-categoria="Quiches">Quiches</button>
-          <button type="button" class="btn btn-outline-indigo categoria-btn" data-categoria="Empanadas">Empanadas</button>
-          <button type="button" class="btn btn-outline-indigo categoria-btn" data-categoria="Té en hoja">Té en hoja</button>
-          <button type="button" class="btn btn-outline-indigo categoria-btn" data-categoria="Café especialidad">Café especialidad</button>
-          <button type="button" class="btn btn-outline-indigo categoria-btn" data-categoria="Otros">Otros</button>
-           <!-- Botón cerrar sesión -->
-        
-          <button id="cerrar-sesion" class="btn btn-outline-indigo">Cerrar sesión</button>
-        
-         </div>
+          <h3 class="mb-3 fw-bold text-indigo ">Seleccionar Categoría</h3>
+          
+          <!-- Botones de categorías -->
+          <div class="d-flex flex-wrap gap-2 mb-4 w-100 justify-content-center">
+            <button type="button" class="btn btn-outline-indigo categoria-btn" data-categoria="">Todos</button>
+            <button type="button" class="btn btn-outline-indigo categoria-btn" data-categoria="Tortas">Tortas</button>
+            <button type="button" class="btn btn-outline-indigo categoria-btn" data-categoria="Postres">Postres</button>
+            <button type="button" class="btn btn-outline-indigo categoria-btn" data-categoria="Tartaletas">Tartaletas</button>
+            <button type="button" class="btn btn-outline-indigo categoria-btn" data-categoria="Quiches">Quiches</button>
+            <button type="button" class="btn btn-outline-indigo categoria-btn" data-categoria="Empanadas">Empanadas</button>
+            <button type="button" class="btn btn-outline-indigo categoria-btn" data-categoria="Té en hoja">Té en hoja</button>
+            <button type="button" class="btn btn-outline-indigo categoria-btn" data-categoria="Café especialidad">Café especialidad</button>
+            <button type="button" class="btn btn-outline-indigo categoria-btn" data-categoria="Otros">Otros</button>
+            <button id="cerrar-sesion" class="btn btn-outline-indigo">Cerrar sesión</button>
+          </div>
         </div>
-    
-       
-    
-       
-    
+
         <!-- Formulario agregar producto -->
         <div class="card shadow-sm rounded-4 mb-5">
           <div class="card-body">
