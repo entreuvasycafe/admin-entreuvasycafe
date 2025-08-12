@@ -137,3 +137,11 @@
     border-color: var(--indigo);
     box-shadow: 0 0 8px rgba(75, 0, 130, 0.5);
   }
+  @media (max-width: 575.98px) {
+  .categoria-btn {
+    padding: 0.3rem 0.5rem !important; /* menos padding en móviles */
+    font-size: 0.95rem !important;      /* texto un poco más pequeño */
+    min-width: 70px !important;         /* ancho mínimo más pequeño */
+  }
+
+}
