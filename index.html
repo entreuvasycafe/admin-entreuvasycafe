@@ -30,15 +30,23 @@
     <!-- Panel admin -->
     <div id="panel-admin" class="mt-5" style="display: none;">
       <div class="container py-4">
+       
     
       <!-- Encabezado con título y logo -->
-        <div class="containLogoEntreUvas d-flex align-items-center justify-content-center p-3 rounded shadow-sm bg-light mb-4 flex-wrap">
-          <img src="img/logo.png" alt="Logo" style="height: 190px; object-fit: contain;">
-          <h3 class="mb-3 fw-bold text-indigo ">Seleccionar Categoría</h3>
+        <div class="containLogoEntreUvas  align-items-center justify-content-center p-3 rounded shadow-sm bg-light mb-4 flex-wrap">
+
+   <div class="header-line">
+  <img src="img/logo.png" alt="Logo" class="logo-img">
+  
+  <div class="title-button-group">
+    <h3 class="mb-3 text-indigo">Seleccionar Categoría</h3>
+    <button id="cerrar-sesion" class="btn btn-outline-indigo categoria-btn">Cerrar sesión</button>
+  </div>
+</div>
           
 
   <!-- Botones de categorías -->
-          <div class="d-flex flex-wrap gap-2 mb-4 w-100 justify-content-center">
+          <div class=" containLogoEntreUvas d-flex flex-wrap gap-2 mb-4 w-100  ">
             <button type="button" class="btn btn-outline-indigo categoria-btn" data-categoria="">Todos</button>
             <button type="button" class="btn btn-outline-indigo categoria-btn" data-categoria="Tortas">Tortas</button>
             <button type="button" class="btn btn-outline-indigo categoria-btn" data-categoria="Postres">Postres</button>
@@ -48,10 +56,10 @@
             <button type="button" class="btn btn-outline-indigo categoria-btn" data-categoria="Té en hoja">Té en hoja</button>
             <button type="button" class="btn btn-outline-indigo categoria-btn" data-categoria="Café especialidad">Café especialidad</button>
             <button type="button" class="btn btn-outline-indigo categoria-btn" data-categoria="Otros">Otros</button>
-            <button id="cerrar-sesion" class="btn btn-outline-indigo">Cerrar sesión</button>
-          </div>
+            
+          </div></div>
 
-        </div>
+        
 
         <!-- Formulario agregar producto -->
         <div class="card shadow-sm rounded-4 mb-5">
